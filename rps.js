@@ -50,7 +50,7 @@ function game(){
         let playerChoice = prompt("Enter Your Choice: ");
         let computerChoice = getComputerChoice();
         let result = rpsRound(playerChoice, computerChoice);
-        result = result.slice(4);
+        console.log(result);
         if(result[4] == 'W'){
             humanScore++;
         }
@@ -58,6 +58,17 @@ function game(){
             computerScore++;
         }
     }
+    if(humanScore > computerScore){
+        console.log("You Won!");
+    }
+    else if(humanScore < computerScore){
+        console.log("You Lost!");
+    }
+    else{
+        console.log("Draw!");
+    }
+    console.log("Human Score: " + humanScore);
+    console.log("Computer Score: " + computerScore);
 }
 
 function main(){
