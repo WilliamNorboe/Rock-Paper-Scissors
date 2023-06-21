@@ -43,37 +43,40 @@ function rpsRound(playerChoice, computerChoice){
     return result
 }
 
-function game(){
-    let humanScore = 0;
-    let computerScore = 0;
-    for(let i = 0; i < 5; ++i){
-        let playerChoice = prompt("Enter Your Choice: ");
-        let computerChoice = getComputerChoice();
-        let result = rpsRound(playerChoice, computerChoice);
-        console.log(result);
+let humanScore = 0;
+let computerScore = 0;
+const human = document.querySelector('#humanScore');
+const com = document.querySelector('#comScore');
+const roundResult = document.querySelector('#result');
+const buttons = document.querySelectorAll('button');
+
+const display = document.querySelector('#gameBoard');
+const body = document.querySelector('body');
+for(let i = 0; i < 3; ++i){
+    buttons[i].addEventListener('click',() => {
+        console.log(buttons[i].id);
+        let result = rpsRound(buttons[i].id, getComputerChoice());
+        roundResult.textContent = result;
         if(result[4] == 'W'){
             humanScore++;
+            human.textContent = humanScore;
         }
         else if(result[4] == 'L'){
             computerScore++;
+            com.textContent = computerScore;
         }
-    }
-    if(humanScore > computerScore){
-        console.log("You Won!");
-    }
-    else if(humanScore < computerScore){
-        console.log("You Lost!");
-    }
-    else{
-        console.log("Draw!");
-    }
-    console.log("Human Score: " + humanScore);
-    console.log("Computer Score: " + computerScore);
+
+        if(humanScore == 5|| computerScore == 5){
+            display.remove();
+            const winner = document.createElement('div');
+            winner.id = "winner";
+            if(humanScore > computerScore){
+                winner.textContent = "You Win!";
+            }
+            else{
+                winner.textContent = "You Lose!";
+            }
+            body.appendChild(winner);
+        }
+    });
 }
-
-function main(){
-    console.log("yo");
-}
-
-
-main();
